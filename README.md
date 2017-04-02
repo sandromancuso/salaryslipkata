@@ -8,7 +8,7 @@ Salary slip kata
 
 
 ### Acceptance criteria:
-- Salary slip generator should pass an employee with its Employee Id, Employee Name and Annual Gross Salary
+- Salary slip generator should receive an employee with its Employee Id, Employee Name and Annual Gross Salary
 - Salary slip should contain the Employee ID, Employee Name, Gross Salary, National Insurance contributions, Tax-free allowance, Taxable income and Tax payable for the month
 - The entry point should be the following interface, which you can not change:
 
