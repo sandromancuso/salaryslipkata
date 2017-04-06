@@ -4,6 +4,7 @@ public class SalarySlipGenerator {
 
     public SalarySlip generateFor(Employee employee) {
         TaxInfo taxInfo = new TaxInfo(employee.grossSalary());
-        return new SalarySlip(employee, taxInfo);
+        NationalInsurance nationalInsurance = new NationalInsurance(employee.grossSalary());
+        return new SalarySlip(employee, nationalInsurance, taxInfo);
     }
 }

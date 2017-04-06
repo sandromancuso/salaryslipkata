@@ -18,14 +18,32 @@ public class SalarySlipShould {
 
     @Test
     @Parameters({
+            "6000, 0.00",
+            "11000, 29.40",
+            "12000, 39.40",
+            "30000, 219.40"
+    })
+    public void
+    inform_monthly_national_insurance(BigDecimal annualGrossSalary, BigDecimal nationalInsurance) {
+        SalarySlip salarySlip = new SalarySlip(AN_EMPLOYEE,
+                                                new NationalInsurance(annualGrossSalary),
+                                                new TaxInfo(annualGrossSalary));
+
+        assertThat(salarySlip.nationalInsurance()).isEqualTo(nationalInsurance);
+    }
+
+    @Test
+    @Parameters({
             "6000, 500.00",
             "11000, 916.67",
             "12000, 916.67",
             "30000, 916.67"
     })
     public void
-    should_inform_monthly_tax_free_allowance(BigDecimal annualGrossSalary, BigDecimal monthlyTaxFreeAllowance) {
-        SalarySlip salarySlip = new SalarySlip(AN_EMPLOYEE, new TaxInfo(annualGrossSalary));
+    inform_monthly_tax_free_allowance(BigDecimal annualGrossSalary, BigDecimal monthlyTaxFreeAllowance) {
+        SalarySlip salarySlip = new SalarySlip(AN_EMPLOYEE,
+                                                new NationalInsurance(annualGrossSalary),
+                                                new TaxInfo(annualGrossSalary));
 
         assertThat(salarySlip.taxFreeAllowance()).isEqualTo(monthlyTaxFreeAllowance);
     }
@@ -38,8 +56,10 @@ public class SalarySlipShould {
             "30000, 1583.33"
     })
     public void
-    should_inform_monthly_taxable_income(BigDecimal annualGrossSalary, BigDecimal monthlyTaxableIncome) {
-        SalarySlip salarySlip = new SalarySlip(AN_EMPLOYEE, new TaxInfo(annualGrossSalary));
+    inform_monthly_taxable_income(BigDecimal annualGrossSalary, BigDecimal monthlyTaxableIncome) {
+        SalarySlip salarySlip = new SalarySlip(AN_EMPLOYEE,
+                                                new NationalInsurance(annualGrossSalary),
+                                                new TaxInfo(annualGrossSalary));
 
         assertThat(salarySlip.taxableIncome()).isEqualTo(monthlyTaxableIncome);
     }
@@ -52,8 +72,10 @@ public class SalarySlipShould {
             "30000, 316.67"
     })
     public void
-    should_inform_monthly_tax_payable(BigDecimal annualGrossSalary, BigDecimal monthlyTaxableIncome) {
-        SalarySlip salarySlip = new SalarySlip(AN_EMPLOYEE, new TaxInfo(annualGrossSalary));
+    inform_monthly_tax_payable(BigDecimal annualGrossSalary, BigDecimal monthlyTaxableIncome) {
+        SalarySlip salarySlip = new SalarySlip(AN_EMPLOYEE,
+                                                new NationalInsurance(annualGrossSalary),
+                                                new TaxInfo(annualGrossSalary));
 
         assertThat(salarySlip.taxPayable()).isEqualTo(monthlyTaxableIncome);
     }
