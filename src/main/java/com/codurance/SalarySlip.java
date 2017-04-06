@@ -8,8 +8,8 @@ public class SalarySlip {
 
     private static final int TWO_DECIMAL_CASES = 2;
     private static final BigDecimal TWELVE_MONTHS = new BigDecimal(12);
-    public static final double NATIONAL_INSURANCE_CONTRIBUTION = 0.12;
-    public static final BigDecimal NO_CONTRIBUTION = new BigDecimal(0);
+    private static final double NATIONAL_INSURANCE_CONTRIBUTION = 0.12;
+    private static final BigDecimal NO_CONTRIBUTION = twoDecimalCases(new BigDecimal(0.00));
 
     private Employee employee;
     private TaxInfo taxInfo;
@@ -19,34 +19,34 @@ public class SalarySlip {
         this.taxInfo = taxInfo;
     }
 
-    int employeeID() {
+    public int employeeID() {
         return employee.ID();
     }
 
-    String employeeName() {
+    public String employeeName() {
         return employee.name();
     }
 
-    BigDecimal monthlyGrossSalary() {
+    public BigDecimal monthlyGrossSalary() {
         return divideBy12(employee.grossSalary());
     }
 
-    BigDecimal nationalInsurance() {
+    public BigDecimal nationalInsurance() {
         BigDecimal salaryExcess = employee.grossSalary().subtract(BigDecimal.valueOf(8060));
         return salaryExcess.doubleValue() > 0
                     ? divideBy12(multiply(salaryExcess, NATIONAL_INSURANCE_CONTRIBUTION))
                     : NO_CONTRIBUTION;
     }
 
-    BigDecimal taxFreeAllowance() {
+    public BigDecimal taxFreeAllowance() {
         return divideBy12(taxInfo.taxFreeAllowance());
     }
 
-    BigDecimal taxableIncome() {
+    public BigDecimal taxableIncome() {
         return divideBy12(taxInfo.taxableIncome());
     }
 
-    BigDecimal taxPayable() {
+    public BigDecimal taxPayable() {
         return divideBy12(taxInfo.taxPayable());
     }
 
@@ -56,5 +56,9 @@ public class SalarySlip {
 
     private BigDecimal multiply(BigDecimal amount, double multiplicand) {
         return amount.multiply(BigDecimal.valueOf(multiplicand)).setScale(2, ROUND_HALF_UP);
+    }
+
+    private static BigDecimal twoDecimalCases(BigDecimal source) {
+        return source.setScale(2, ROUND_HALF_UP);
     }
 }

@@ -48,16 +48,16 @@ public class SalarySlipGeneratorShould {
     
     @Test
     @Parameters({
-            "8060, 0",
-            "5000, 0"
+            "8060.00, 0.00",
+            "5000.00, 0.00"
     })
     public void
-    generate_slip_with_national_insurance_set_to_zero_when_salary_is_up_to_8060_00(double annualSalary, double nationalInsurance) {
+    generate_slip_with_national_insurance_set_to_zero_when_salary_is_up_to_8060_00(BigDecimal annualSalary, BigDecimal nationalInsurance) {
         Employee employee = anEmployee().withAnnualGrossSalary(annualSalary).build();
 
         SalarySlip salarySlip_1 = salarySlipGenerator.generateFor(employee);
 
-        assertThat(salarySlip_1.nationalInsurance().doubleValue()).isEqualTo(nationalInsurance);
+        assertThat(salarySlip_1.nationalInsurance()).isEqualTo(nationalInsurance);
     }
 
     @Test

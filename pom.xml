@@ -14,7 +14,7 @@
 		<junitparams.version>1.0.6</junitparams.version>
 		<assertj.version>3.6.2</assertj.version>
 		<mockito.version>1.10.19</mockito.version>
-		<cucumber.version>1.2.2</cucumber.version>
+		<cucumber.version>1.2.5</cucumber.version>
 	</properties>
 
 	<dependencies>
@@ -55,7 +55,7 @@
 		</dependency>
 		<dependency>
 			<groupId>info.cukes</groupId>
-			<artifactId>cucumber-java</artifactId>
+			<artifactId>cucumber-java8</artifactId>
 			<version>${cucumber.version}</version>
 			<scope>test</scope>
 		</dependency>
