@@ -2,7 +2,7 @@ package com.codurance;
 
 import java.math.BigDecimal;
 
-import static java.math.RoundingMode.CEILING;
+import static java.math.BigDecimal.ROUND_HALF_UP;
 
 public class SalarySlip {
 
@@ -38,15 +38,23 @@ public class SalarySlip {
                     : NO_CONTRIBUTION;
     }
 
-    TaxInfo taxInfo() {
-        return taxInfo;
+    BigDecimal taxFreeAllowance() {
+        return divideBy12(taxInfo.taxFreeAllowance());
+    }
+
+    BigDecimal taxableIncome() {
+        return divideBy12(taxInfo.taxableIncome());
+    }
+
+    BigDecimal taxPayable() {
+        return divideBy12(taxInfo.taxPayable());
     }
 
     private BigDecimal divideBy12(BigDecimal amount) {
-        return amount.divide(TWELVE_MONTHS, TWO_DECIMAL_CASES, CEILING);
+        return amount.divide(TWELVE_MONTHS, TWO_DECIMAL_CASES, ROUND_HALF_UP);
     }
 
     private BigDecimal multiply(BigDecimal amount, double multiplicand) {
-        return amount.multiply(BigDecimal.valueOf(multiplicand)).setScale(2, BigDecimal.ROUND_HALF_UP);
+        return amount.multiply(BigDecimal.valueOf(multiplicand)).setScale(2, ROUND_HALF_UP);
     }
 }

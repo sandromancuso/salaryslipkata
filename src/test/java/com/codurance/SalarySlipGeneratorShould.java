@@ -74,12 +74,4 @@ public class SalarySlipGeneratorShould {
         assertThat(salarySlip_1.nationalInsurance().doubleValue()).isEqualTo(nationalInsurance);
     }
 
-    @Test public void
-    generate_slip_with_tax_info() {
-        Employee employee = anEmployee().build();
-
-        SalarySlip salarySlip = salarySlipGenerator.generateFor(employee);
-
-        assertThat(salarySlip.taxInfo()).isNotNull();
-    }
 }
