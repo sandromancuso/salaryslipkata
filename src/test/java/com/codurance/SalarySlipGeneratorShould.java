@@ -16,7 +16,6 @@ public class SalarySlipGeneratorShould {
 
     private static final int ID = 123445;
     private static final String NAME = "John J Doe";
-    private static final BigDecimal GROSS_SALARY = new BigDecimal(5000);
 
     private SalarySlipGenerator salarySlipGenerator;
 
@@ -75,4 +74,12 @@ public class SalarySlipGeneratorShould {
         assertThat(salarySlip_1.nationalInsurance().doubleValue()).isEqualTo(nationalInsurance);
     }
 
+    @Test public void
+    generate_slip_with_tax_info() {
+        Employee employee = anEmployee().build();
+
+        SalarySlip salarySlip = salarySlipGenerator.generateFor(employee);
+
+        assertThat(salarySlip.taxInfo()).isNotNull();
+    }
 }

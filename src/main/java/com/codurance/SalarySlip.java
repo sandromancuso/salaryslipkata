@@ -12,9 +12,11 @@ public class SalarySlip {
     public static final BigDecimal NO_CONTRIBUTION = new BigDecimal(0);
 
     private Employee employee;
+    private TaxInfo taxInfo;
 
-    public SalarySlip(Employee employee) {
+    public SalarySlip(Employee employee, TaxInfo taxInfo) {
         this.employee = employee;
+        this.taxInfo = taxInfo;
     }
 
     int employeeID() {
@@ -34,6 +36,10 @@ public class SalarySlip {
         return salaryExcess.doubleValue() > 0
                     ? divideBy12(multiply(salaryExcess, NATIONAL_INSURANCE_CONTRIBUTION))
                     : NO_CONTRIBUTION;
+    }
+
+    TaxInfo taxInfo() {
+        return taxInfo;
     }
 
     private BigDecimal divideBy12(BigDecimal amount) {
