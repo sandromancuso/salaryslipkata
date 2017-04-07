@@ -115,7 +115,7 @@ For high earners, the tax-free allowance decreases.
            Tax-free allowance: £875.00
            Taxable income: £7,541.67
            Tax Payable: £2,483.33
-
+   <br>
 
            Employee ID: 12345
            Employee Name: John J Doe
@@ -124,7 +124,7 @@ For high earners, the tax-free allowance decreases.
            Tax-free allowance: £458.33
            Taxable income: £8,791.67
            Tax Payable: £2,983.33
-
+   <br>
 
            Employee ID: 12345
            Employee Name: John J Doe
@@ -133,7 +133,7 @@ For high earners, the tax-free allowance decreases.
            Tax-free allowance: £0.00
            Taxable income: £10,166.67
            Tax Payable: £3,533.33
-
+   <br>
 
            Employee ID: 12345
            Employee Name: John J Doe

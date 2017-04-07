@@ -14,8 +14,8 @@ public class TaxInfoShould {
     
     @Test
     @Parameters({
-            "11000, 11000, 0, 0",
-            "5000, 5000, 0, 0"
+            "11000.00, 11000.00, 0.00, 0.00",
+            "5000.00, 5000.00, 0.00, 0.00"
     })
     public void
     have_tax_of_zero_for_annual_salaries_up_to_11000(BigDecimal annualGrossSalary,
@@ -31,9 +31,9 @@ public class TaxInfoShould {
 
     @Test
     @Parameters({
-            "12000, 11000, 1000, 200.00",
-            "30000, 11000, 19000, 3800.00",
-            "43000, 11000, 32000, 6400.00"
+            "12000.00, 11000.00, 1000.00, 200.00",
+            "30000.00, 11000.00, 19000.00, 3800.00",
+            "43000.00, 11000.00, 32000.00, 6400.00"
     })
     public void
     have_20_percent_tax_for_annual_salaries_between_11000_and_43000(BigDecimal annualGrossSalary,
@@ -49,11 +49,32 @@ public class TaxInfoShould {
 
     @Test
     @Parameters({
-            "45000, 11000, 34000, 7200.00",
-            "50000, 11000, 39000, 9200.00"
+            "45000.00, 11000.00, 34000.00, 7200.00",
+            "50000.00, 11000.00, 39000.00, 9200.00",
+            "100000.00, 11000.00, 89000.00, 29200.00"
     })
     public void
     have_40_percent_tax_for_annual_salaries_above_43000(BigDecimal annualGrossSalary,
+                                                        BigDecimal taxFreeAllowance,
+                                                        BigDecimal taxableIncome,
+                                                        BigDecimal taxPayable) {
+        TaxInfo taxInfo = new TaxInfo(annualGrossSalary);
+
+        assertThat(taxInfo.taxFreeAllowance()).isEqualTo(taxFreeAllowance);
+        assertThat(taxInfo.taxableIncome()).isEqualTo(taxableIncome);
+        assertThat(taxInfo.taxPayable()).isEqualTo(taxPayable);
+    }
+
+    @Test
+    @Parameters({
+            "101000, 10500.00, 90500.00, 29800.00",
+            "111000, 5500.00, 105500.00, 35800.00",
+            "122000, 0.00, 122000.00, 42400.00",
+            "150000, 0.00, 150000.00, 53600.00"
+    })
+    public void
+    have_tax_free_allowance_decreased_by_1_for_every_2_pounds_for_salaries_above_100K(
+                                                        BigDecimal annualGrossSalary,
                                                         BigDecimal taxFreeAllowance,
                                                         BigDecimal taxableIncome,
                                                         BigDecimal taxPayable) {
