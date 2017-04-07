@@ -146,7 +146,7 @@ For high earners, the tax-free allowance decreases.
 Calculation rules:
  * Tax-free allowance: When the Annual Gross Salary exceeds £100,000.00, the tax-free allowance starts decreasing. It decreases by £1 for every £2 earned over £100,000.00. And this excess is taxed at the Higher rate tax.
 
-#### Iteration 9: for an annual gross salary of £160,000.00
+#### Iteration 6: for an annual gross salary of £160,000.00
 
 The employee goes into the additional rate band.
 
