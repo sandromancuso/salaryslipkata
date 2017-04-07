@@ -27,10 +27,22 @@ public class NationalInsuranceShould {
     @Test
     @Parameters({
             "9060.00, 120.00",
-            "10060.00, 240.00"
+            "10060.00, 240.00",
+            "43000.00, 4192.80"
     })
     public void
-    be_12_percent_of_earnings_above_8060_00(BigDecimal annualSalary, BigDecimal nationalInsuranceContribution) {
+    be_12_percent_of_earnings_between_8060_00_and_43000_00(BigDecimal annualSalary, BigDecimal nationalInsuranceContribution) {
+        NationalInsurance nationalInsurance = new NationalInsurance(annualSalary);
+
+        assertThat(nationalInsurance.contribution()).isEqualTo(nationalInsuranceContribution);
+    }
+
+    @Test
+    @Parameters({
+            "45000.00, 4232.80"
+    })
+    public void
+    be_2_percent_for_earnings_above_43000_00(BigDecimal annualSalary, BigDecimal nationalInsuranceContribution) {
         NationalInsurance nationalInsurance = new NationalInsurance(annualSalary);
 
         assertThat(nationalInsurance.contribution()).isEqualTo(nationalInsuranceContribution);
