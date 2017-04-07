@@ -1,6 +1,6 @@
-Feature: Printing Salary Slip
+Feature: Generate Salary Slip
 
-	Scenario Outline: Print salaries with different taxation
+	Scenario Outline: Generate salary slip with different taxation
 
 		Given an employee with an annual gross salary of £ <gross_salary>
  	    When we generate the salary slip
