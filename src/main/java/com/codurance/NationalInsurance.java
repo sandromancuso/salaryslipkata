@@ -8,7 +8,6 @@ class NationalInsurance {
 
     private static final BigDecimal MAX_SALARY_WITH_NO_CONTRIBUTION = twoDecimalCases(8060.00);
     private static final BigDecimal HIGHER_RATE_SALARY = twoDecimalCases(43000.00);
-    private static final BigDecimal NO_CONTRIBUTION = twoDecimalCases(0.00);
     private static final double NORMAL_CONTRIBUTION_RATE = 0.12;
     private static final double HIGHER_CONTRIBUTION_RATE = 0.02;
 
