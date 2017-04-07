@@ -10,10 +10,12 @@ class TaxInfo {
     private static final BigDecimal MAX_TAX_FREE_ALLOWANCE = twoDecimalCases(11000);
     private static final BigDecimal NO_ALLOWANCE = twoDecimalCases(0.00);
     private static final BigDecimal HIGHER_SALARY_LIMIT = twoDecimalCases(43000);
+    private static final BigDecimal HIGHEST_SALARY_LIMIT = twoDecimalCases(150000);
     private static final BigDecimal ONE_HUNDRED_THOUSAND = twoDecimalCases(100000);
 
     private static final BigDecimal NORMAL_TAX_RATE = twoDecimalCases(0.20);
     private static final BigDecimal HIGHER_TAX_RATE = twoDecimalCases(0.40);
+    private static final BigDecimal HIGHEST_TAX_RATE = twoDecimalCases(0.45);
 
     private BigDecimal annualGrossSalary;
     private BigDecimal taxFreeAllowance;
@@ -21,7 +23,6 @@ class TaxInfo {
     TaxInfo(BigDecimal annualGrossSalary) {
         this.annualGrossSalary = annualGrossSalary;
         this.taxFreeAllowance = calculateTaxFreeAllowance(annualGrossSalary);
-        System.out.println("tax free allowance: " + taxFreeAllowance);
     }
 
     BigDecimal taxFreeAllowance() {
@@ -37,14 +38,26 @@ class TaxInfo {
     BigDecimal taxPayable() {
         BigDecimal taxPayableAtNormalRate = taxPayableAtNormalRate();
         BigDecimal taxPayableAtHigherRate = taxPayableAtHigherRate();
+        BigDecimal taxPayableAtHighestRate = taxPayableAtHighestRate();
 
-        return taxPayableAtNormalRate.add(taxPayableAtHigherRate);
+        return taxPayableAtNormalRate.add(taxPayableAtHigherRate).add(taxPayableAtHighestRate);
+    }
+
+    private BigDecimal taxPayableAtHighestRate() {
+        BigDecimal taxAtHighestRate = NO_TAX;
+        if (annualGrossSalary.doubleValue() > HIGHEST_SALARY_LIMIT.doubleValue()) {
+            taxAtHighestRate = multiply(annualGrossSalary.subtract(HIGHEST_SALARY_LIMIT), HIGHEST_TAX_RATE);
+        }
+        return taxAtHighestRate;
     }
 
     private BigDecimal taxPayableAtHigherRate() {
         BigDecimal taxAtHigherRate = NO_TAX;
         if (annualGrossSalary.doubleValue() > HIGHER_SALARY_LIMIT.doubleValue()) {
-            BigDecimal taxableAmount = annualGrossSalary.subtract(HIGHER_SALARY_LIMIT);
+            BigDecimal taxableAmount = ((annualGrossSalary.doubleValue() > HIGHEST_SALARY_LIMIT.doubleValue())
+                                            ? HIGHEST_SALARY_LIMIT
+                                            : annualGrossSalary)
+                                        .subtract(HIGHER_SALARY_LIMIT);
 
             BigDecimal taxFreeDiff = MAX_TAX_FREE_ALLOWANCE.subtract(taxFreeAllowance);
             taxableAmount = taxableAmount.add(taxFreeDiff);
@@ -56,7 +69,7 @@ class TaxInfo {
 
     private BigDecimal taxPayableAtNormalRate() {
         BigDecimal taxAtNormalRate = NO_TAX;
-         if (annualGrossSalary.doubleValue() > taxFreeAllowance.doubleValue()) {
+        if (annualGrossSalary.doubleValue() > taxFreeAllowance.doubleValue()) {
             BigDecimal taxableAmount = (annualGrossSalary.doubleValue() > HIGHER_SALARY_LIMIT.doubleValue())
                                             ? HIGHER_SALARY_LIMIT
                                             : annualGrossSalary;

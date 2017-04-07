@@ -18,7 +18,7 @@ public class TaxInfoShould {
             "5000.00, 5000.00, 0.00, 0.00"
     })
     public void
-    have_tax_of_zero_for_annual_salaries_up_to_11000(BigDecimal annualGrossSalary,
+    calculate_zero_percent_tax_for_earnings_up_to_11000(BigDecimal annualGrossSalary,
                                                      BigDecimal taxFreeAllowance,
                                                      BigDecimal taxableIncome,
                                                      BigDecimal taxPayable) {
@@ -36,7 +36,7 @@ public class TaxInfoShould {
             "43000.00, 11000.00, 32000.00, 6400.00"
     })
     public void
-    have_20_percent_tax_for_annual_salaries_between_11000_and_43000(BigDecimal annualGrossSalary,
+    calculate_20_percent_tax_for_earnings_between_11000_and_43000(BigDecimal annualGrossSalary,
                                                                     BigDecimal taxFreeAllowance,
                                                                     BigDecimal taxableIncome,
                                                                     BigDecimal taxPayable) {
@@ -54,7 +54,7 @@ public class TaxInfoShould {
             "100000.00, 11000.00, 89000.00, 29200.00"
     })
     public void
-    have_40_percent_tax_for_annual_salaries_above_43000(BigDecimal annualGrossSalary,
+    calculate_40_percent_tax_for_earnings_between_43000_and_150000(BigDecimal annualGrossSalary,
                                                         BigDecimal taxFreeAllowance,
                                                         BigDecimal taxableIncome,
                                                         BigDecimal taxPayable) {
@@ -78,6 +78,24 @@ public class TaxInfoShould {
                                                         BigDecimal taxFreeAllowance,
                                                         BigDecimal taxableIncome,
                                                         BigDecimal taxPayable) {
+        TaxInfo taxInfo = new TaxInfo(annualGrossSalary);
+
+        assertThat(taxInfo.taxFreeAllowance()).isEqualTo(taxFreeAllowance);
+        assertThat(taxInfo.taxableIncome()).isEqualTo(taxableIncome);
+        assertThat(taxInfo.taxPayable()).isEqualTo(taxPayable);
+    }
+
+    @Test
+    @Parameters({
+            "160000.00, 0.00, 160000.00, 58100.00",
+            "200000.00, 0.00, 200000.00, 76100.00"
+    })
+    public void
+    calculate_45_percent_tax_for_earnings_above_150000(
+                                                BigDecimal annualGrossSalary,
+                                                BigDecimal taxFreeAllowance,
+                                                BigDecimal taxableIncome,
+                                                BigDecimal taxPayable) {
         TaxInfo taxInfo = new TaxInfo(annualGrossSalary);
 
         assertThat(taxInfo.taxFreeAllowance()).isEqualTo(taxFreeAllowance);
