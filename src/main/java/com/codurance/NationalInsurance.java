@@ -12,12 +12,18 @@ class NationalInsurance {
     private static final double HIGHER_CONTRIBUTION_RATE = 0.02;
 
     private BigDecimal annualSalary;
+    private BigDecimal contribution;
 
     NationalInsurance(BigDecimal annualSalary) {
         this.annualSalary = annualSalary;
+        this.contribution = calculateContribution();
     }
 
     BigDecimal contribution() {
+        return contribution;
+    }
+
+    private BigDecimal calculateContribution() {
         BigDecimal taxableAmountAtNormalRate = taxableAmountAtNormalRate();
         BigDecimal taxableAmountAtHigherRate = taxableAmountAtHigherRate();
 
