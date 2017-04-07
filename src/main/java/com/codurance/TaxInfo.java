@@ -19,10 +19,14 @@ class TaxInfo {
 
     private BigDecimal annualGrossSalary;
     private BigDecimal taxFreeAllowance;
+    private BigDecimal taxableIncome;
+    private BigDecimal taxPayable;
 
     TaxInfo(BigDecimal annualGrossSalary) {
         this.annualGrossSalary = annualGrossSalary;
         this.taxFreeAllowance = calculateTaxFreeAllowance(annualGrossSalary);
+        this.taxableIncome = calculateTaxableIncome();
+        this.taxPayable = calculateTaxPayable();
     }
 
     BigDecimal taxFreeAllowance() {
@@ -30,17 +34,25 @@ class TaxInfo {
     }
 
     BigDecimal taxableIncome() {
-        return (isGrossSalaryAboveMaxTaxFreeAllowance())
-                    ? annualGrossSalary.subtract(taxFreeAllowance())
-                    : NO_TAX;
+        return taxableIncome;
     }
 
     BigDecimal taxPayable() {
+        return taxPayable;
+    }
+
+    private BigDecimal calculateTaxPayable() {
         BigDecimal taxPayableAtNormalRate = taxPayableAtNormalRate();
         BigDecimal taxPayableAtHigherRate = taxPayableAtHigherRate();
         BigDecimal taxPayableAtHighestRate = taxPayableAtHighestRate();
 
         return taxPayableAtNormalRate.add(taxPayableAtHigherRate).add(taxPayableAtHighestRate);
+    }
+
+    private BigDecimal calculateTaxableIncome() {
+        return (isGrossSalaryAboveMaxTaxFreeAllowance())
+                ? annualGrossSalary.subtract(taxFreeAllowance())
+                : NO_TAX;
     }
 
     private BigDecimal taxPayableAtHighestRate() {
