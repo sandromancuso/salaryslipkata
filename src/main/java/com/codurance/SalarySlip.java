@@ -2,16 +2,16 @@ package com.codurance;
 
 import java.math.BigDecimal;
 
-import static java.math.BigDecimal.ROUND_HALF_UP;
+import static java.math.RoundingMode.HALF_UP;
 
 public class SalarySlip {
 
     private static final int TWO_DECIMAL_CASES = 2;
     private static final BigDecimal TWELVE_MONTHS = new BigDecimal(12);
 
-    private Employee employee;
-    private NationalInsurance nationalInsurance;
-    private TaxInfo taxInfo;
+    final private Employee employee;
+    final private NationalInsurance nationalInsurance;
+    final private TaxInfo taxInfo;
 
     public SalarySlip(Employee employee,
                       NationalInsurance nationalInsurance,
@@ -50,7 +50,7 @@ public class SalarySlip {
     }
 
     private BigDecimal divideBy12(BigDecimal amount) {
-        return amount.divide(TWELVE_MONTHS, TWO_DECIMAL_CASES, ROUND_HALF_UP);
+        return amount.divide(TWELVE_MONTHS, TWO_DECIMAL_CASES, HALF_UP);
     }
 
 }
