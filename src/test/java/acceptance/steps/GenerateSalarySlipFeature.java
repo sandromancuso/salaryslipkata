@@ -3,7 +3,7 @@ package acceptance.steps;
 import com.codurance.Employee;
 import com.codurance.SalarySlip;
 import com.codurance.SalarySlipGenerator;
-import cucumber.api.java8.En;
+import io.cucumber.java8.En;
 
 import java.math.BigDecimal;
 
