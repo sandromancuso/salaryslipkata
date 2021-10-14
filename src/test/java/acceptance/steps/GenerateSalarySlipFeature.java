@@ -3,12 +3,12 @@ package acceptance.steps;
 import com.codurance.Employee;
 import com.codurance.SalarySlip;
 import com.codurance.SalarySlipGenerator;
-import cucumber.api.java8.En;
+import io.cucumber.java8.En;
 
 import java.math.BigDecimal;
 
 import static com.codurance.EmployeeBuilder.anEmployee;
-import static java.math.BigDecimal.ROUND_HALF_UP;
+import static java.math.RoundingMode.HALF_UP;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class GenerateSalarySlipFeature implements En {
@@ -52,6 +52,6 @@ public class GenerateSalarySlipFeature implements En {
     }
 
     private BigDecimal twoDecimalCases(BigDecimal source) {
-        return source.setScale(2, ROUND_HALF_UP);
+        return source.setScale(2, HALF_UP);
     }
 }
